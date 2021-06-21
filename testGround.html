@@ -1,0 +1,122 @@
+
+<html>
+    <head>
+         <!-- The core Firebase JS SDK is always required and must be listed first -->
+      <script src="https://www.gstatic.com/firebasejs/8.6.4/firebase-app.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/8.6.4/firebase-auth.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-firestore.js"></script>
+      <!-- Firebase Storage CDN -->
+      <script src="https://www.gstatic.com/firebasejs/8.6.4/firebase-storage.js"></script>
+      <!-- TODO: Add SDKs for Firebase products that you want to use
+         https://firebase.google.com/docs/web/setup#available-libraries -->
+        <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyDjsKQlqNRWOWD6Qw6tklqtP03BtUW_lqw",
+            authDomain: "groceryapp-b381a.firebaseapp.com",
+            databaseURL: "https://groceryapp-b381a.firebaseio.com",
+            projectId: "groceryapp-b381a",
+            storageBucket: "groceryapp-b381a.appspot.com",
+            messagingSenderId: "1092044916930",
+            appId: "1:1092044916930:web:b3493c5ddfdef83633d35b",
+            storageBucket: 'gs://groceryapp-b381a.appspot.com'
+        };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      var db = firebase.firestore();
+      </script>
+
+      <script
+        src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+        crossorigin="anonymous"
+      ></script>
+    </head>
+  
+    <body>
+      <span id="field1"></span>
+  
+      <script>
+          
+        $.extend({
+          getUrlVars: function () {
+            var vars = [],
+              hash;
+            var hashes = window.location.href
+              .slice(window.location.href.indexOf('?') + 1)
+              .split('&');
+            for (var i = 0; i < hashes.length; i++) {
+              hash = hashes[i].split('=');
+              vars.push(hash[0]);
+              vars[hash[0]] = hash[1];
+            }
+            return vars;
+          },
+          getUrlVar: function (name) {
+            return $.getUrlVars()[name];
+          },
+        });
+  
+        $(document).ready(function () {
+  
+          firebase
+            .firestore()
+            .collection('blogPosts')
+            .doc('fhQD3lhp3NhA2myQhw0P')
+            .get()
+            .then(function (doc) {
+              if (doc.exists) {
+                  console.log("it exists");
+                $('#field1').text(doc.data().field1);
+              } else {
+                // doc.data() will be undefined in this case
+                console.log('No such document!');
+              }
+            })
+            .catch(function (error) {
+              console.log('Error getting document:', error);
+            });
+        });
+      </script>
+    </body>
+  </html>
+<!-- ////////////////////////////////// -->
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>   
+        const doc = document.implementation.createHTMLDocument();
+        const base = doc.createElement( 'base' );
+        base.href = "file:///Users/alialyami/Documents/sawaleenn4"
+        doc.head.append( base );
+
+    </script>
+    <title>Document</title>
+</head>
+<body>
+    <div style="text-align: center">
+        <div id="" style="width:100px; height:100px; margin-top:25px;"></div>
+
+        <div style="margin-top: 50px; height: 200px;  width: 100%; text-align: center">
+            <button type="button" id="profileButton" style="border: solid 1px black; background-color: green;">Go To Profile</button>
+        </div>
+    </div>
+</body>
+
+<script>
+    document.getElementById("profileButton").addEventListener('click', function()
+    {
+        const a = doc.createElement( "a" );
+        a.href = "barberprofile/barber1.html";
+        doc.body.append( a );
+        window.location.assign(a);
+        console.log( a.href );
+        // const rel = "barberProfile/4444.html";
+        // console.log( new URL( rel, base ).href );
+    })
+    
+</script>
+</html> -->
